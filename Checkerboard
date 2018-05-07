@@ -1,0 +1,51 @@
+import javax.swing.*;
+import java.awt.*;                      
+public class Checkerboard extends JFrame{
+	
+	Checkerboard()
+	{
+		JButton black[]=new JButton[4*8];
+		JButton white[]=new JButton[4*8];
+						
+		JPanel p=new JPanel(new GridLayout(8,8));
+		
+		for(int i=0;i<black.length;i++)
+		{
+			black[i]=new JButton();
+			black[i].setBackground(Color.BLACK);
+		}
+		for(int i=0;i<white.length;i++)
+		{
+			white[i]=new JButton();
+			white[i].setBackground(Color.WHITE);
+		}	
+		for(int i=0;i<8;i++)
+		{
+			if(i%2==0)
+			{
+				for(int j=0;j<4;j++)
+				{
+					p.add(black[4*i+j]);
+					p.add(white[4*i+j]);
+				}
+			}
+			else
+			{
+				for(int j=0;j<4;j++)
+				{
+					p.add(white[4*i+j]);
+					p.add(black[4*i+j]);
+				}
+			}
+		}
+		add(p);
+	}
+	public static void main(String[]args)
+	{
+		JFrame f=new Checkerboard();
+		f.setSize(600,600);
+		f.setLocationRelativeTo(null);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setVisible(true);
+	}
+}
