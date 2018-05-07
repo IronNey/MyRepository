@@ -1,0 +1,88 @@
+package assignment5;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+public class Calculator extends JFrame{
+	
+	private JLabel num1=new JLabel("Number 1");
+	private JLabel num2=new JLabel("Number 2");
+	private JLabel result=new JLabel("Result");
+	
+	private JTextField n1=new JTextField(4);
+	private JTextField n2=new JTextField(4);
+	private JTextField re=new JTextField(4);
+	
+	private JButton add=new JButton("Add");
+	private JButton sub=new JButton("Subtract");
+	private JButton mul=new JButton("Multiply");
+	private JButton div=new JButton("Divide");
+		
+   public Calculator(){
+	   
+	   JPanel p1=new JPanel(new FlowLayout(FlowLayout.LEFT));
+	   JPanel p2=new JPanel(new FlowLayout(FlowLayout.LEFT));
+	   
+	   p1.add(num1);
+	   p1.add(n1);
+	   p1.add(num2);
+	   p1.add(n2);
+	   p1.add(result);
+	   p1.add(re);
+	   
+	   p2.add(add);
+	   p2.add(sub);
+	   p2.add(mul);
+	   p2.add(div);
+	   
+	   add(p1,BorderLayout.NORTH);
+	   add(p2,BorderLayout.SOUTH);  
+	     	   
+	   add.addActionListener(new ActionListener(){
+		   public void actionPerformed(ActionEvent e)
+		   {
+			  int a=Integer.parseInt(n1.getText());    //hepsi i�in tek tek yapmak zorundas�n
+			  int b=Integer.parseInt(n2.getText());
+			   
+			   re.setText(String.format("%d", a+b));
+		   }
+	   });
+	   	   	   
+	   sub.addActionListener(new ActionListener(){
+		   public void actionPerformed(ActionEvent e)
+		   {
+			  int a=Integer.parseInt(n1.getText());
+			  int b=Integer.parseInt(n2.getText());			   
+			   
+			  re.setText(String.format("%d", a-b));			   				  			   
+		   }
+	   });
+	   
+	   mul.addActionListener(new ActionListener(){
+		   public void actionPerformed(ActionEvent e)
+		   {
+			   int a=Integer.parseInt(n1.getText());
+			   int b=Integer.parseInt(n2.getText());
+			   
+			   re.setText(String.format("%d", a*b));
+		   }
+	   });
+	   
+	   div.addActionListener(new ActionListener(){
+		   public void actionPerformed(ActionEvent e)
+		   {
+			   int a=Integer.parseInt(n1.getText());
+			   int b=Integer.parseInt(n2.getText());
+			   
+			   re.setText(String.format("%d", a/b));
+			}
+	   });	   
+   }  
+	public static void main(String[]args){
+		
+		JFrame f=new Calculator();
+		f.setLocationRelativeTo(null);
+		f.setSize(400, 120);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setVisible(true);
+	}
+}
