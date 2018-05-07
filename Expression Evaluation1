@@ -1,0 +1,39 @@
+//Expression evaluation using stack
+
+import java.util.Scanner;
+import java.util.Stack;
+public class onlyStack {
+	public static void main(String[] args) {
+
+		String expr = "2 3 + 4 2 * +";
+		String [] tokens = expr.split(" +");
+		Stack<String> stack2 = new Stack<String>();
+		for(int i = 0; i < tokens.length; i++) {
+			if(isOperator(tokens[i])) {
+				String r = stack2.pop();
+				String l = stack2.pop();
+				stack2.push(applyOp(tokens[i], l, r));
+			}
+			else stack2.push(tokens[i]);
+		}	
+		System.out.println(stack2.pop());		
+	}
+	static boolean isOperator(String token) {
+		return token.matches("[+/*-]");
+	}
+	static String applyOp(String o, String l, String r) {
+		char op = o.charAt(0);
+		if(op == '+')
+			return String.valueOf(
+					Integer.parseInt(l) + Integer.parseInt(r));
+		else if(op == '-')
+			return String.valueOf(
+					Integer.parseInt(l) - Integer.parseInt(r));
+		else if(op == '*')
+			return String.valueOf(
+					Integer.parseInt(l) * Integer.parseInt(r));
+		else
+			return String.valueOf(
+					Integer.parseInt(l) / Integer.parseInt(r));
+	}
+}
