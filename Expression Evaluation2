@@ -1,0 +1,60 @@
+//Expression evaluation using stack and binary tree
+
+import java.util.Stack;
+public class withTree {	
+		public static void main(String[] args){
+			Stack<Node> stack = new Stack<Node>();
+			Node n, left, right;
+			String expr = "2 3 + 4 2 * +";
+			String [] tokens = expr.split(" +");
+			for(int i = 0; i < tokens.length; i++) {
+				if(isOperator(tokens[i])) {
+					n = new ArithNode(tokens[i].charAt(0));
+					right = stack.pop();
+					left = stack.pop();
+					n.left = left;
+					n.right = right;
+					stack.push(n);
+				}
+				else {
+					n = new IntNode(tokens[i]);
+					stack.push(n);
+				}
+			}
+			System.out.println(stack.pop().eval());				
+		}
+		static boolean isOperator(String token) {
+			return token.matches("[+/*-]");
+		}
+}		
+	abstract class Node{
+		abstract int eval();
+		Node left, right;
+	}
+	class IntNode extends Node{
+		int val;
+		IntNode(String v){
+			val = Integer.parseInt(v);
+		}
+		int eval() {
+			return val;
+		}
+	}
+	class ArithNode extends Node{
+		char op;
+		ArithNode(char op){
+			this.op = op;
+			left = null;
+			right = null;
+		}
+		int eval() {
+			if(op == '+')
+				return left.eval() + right.eval();
+			else if(op == '-')
+				return left.eval() - right.eval();
+			else if(op == '*')
+				return left.eval() * right.eval();
+			else
+				return left.eval() / right.eval();
+		}		
+   }
