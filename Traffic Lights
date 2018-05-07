@@ -1,0 +1,103 @@
+import javax.swing.*;
+import java.awt.event.*;
+import javax.swing.border.*;
+public class TL extends JFrame{
+		
+	Drawing panel=new Drawing();
+	JRadioButton red=new JRadioButton("Red");
+	JRadioButton yellow=new JRadioButton("Yellow");
+	JRadioButton green=new JRadioButton("Green");	
+	
+	ButtonGroup buttons=new ButtonGroup();
+	Border line=new LineBorder(Color.BLACK,3);	
+	
+	class Drawing extends JPanel{
+		
+		public boolean RED=false;
+		public boolean YELLOW=false;
+		public boolean GREEN=false;
+		
+		public void paintComponent(Graphics g){
+			
+			setLayout(new GridLayout(3,1));			
+			setBorder(line);
+				if(RED)	{					
+				    g.setColor(Color.RED);
+				    g.fillOval(0, 0, 30, 30);		
+				}
+				else{	
+				    g.setColor(Color.BLACK);
+					g.drawOval(0, 0, 30, 30);
+				}
+				if(YELLOW){				
+				    g.setColor(Color.YELLOW);
+					g.fillOval(0, 30, 30, 30);
+				}
+				else{					
+				    g.setColor(Color.BLACK);
+					g.drawOval(0, 30, 30, 30);
+		}
+				if(GREEN){					
+			     	g.setColor(Color.GREEN);
+					g.fillOval(0, 60, 30, 30);
+				}
+				else{
+					g.setColor(Color.BLACK);
+					g.drawOval(0, 60, 30, 30);		
+				}
+		}		
+	}	
+	TL(){
+				
+		add(panel,BorderLayout.CENTER);
+		JPanel p=new JPanel(new FlowLayout());
+	
+		buttons.add(red);
+		buttons.add(yellow);
+		buttons.add(green);
+		
+		p.add(red);
+		p.add(yellow);
+		p.add(green);
+		
+		add(p,BorderLayout.SOUTH);
+	    
+		red.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+						
+				panel.RED=true;
+				panel.YELLOW=false;
+				panel.GREEN=false;
+									
+				repaint();
+			}
+		});
+		yellow.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				
+					panel.YELLOW=true;
+					panel.RED=false;
+					panel.GREEN=false;
+				
+				repaint();
+			}
+		});
+		green.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+			
+					panel.GREEN=true;
+					panel.YELLOW=false;
+					panel.RED=false;
+				
+				repaint();
+			}
+		});
+	}
+	public static void main(String[]args){
+		
+		TL f=new TL();
+		f.setSize(300,300);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setVisible(true);		
+	}
+}
