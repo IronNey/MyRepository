@@ -1,0 +1,35 @@
+//In a text file if there are more than one the same word the number of that word increases 1 time (line 17)
+
+
+import java.io.*;
+import java.util.*;
+public class MapExample {
+
+	public static void main(String[] args) throws FileNotFoundException {
+			
+		Map<String, Integer> words=new TreeMap<>();
+    
+		Scanner input=new Scanner(new File("story.txt"));
+    
+		while(input.hasNext()){
+			String word=input.next();
+			word=word.toLowerCase();
+			word=word.replaceAll("[.;:%,]", " ");
+			if(words.containsKey(word)){
+				words.put(word, words.get(word)+1);  
+			}
+			else{
+				words.put(word, 1);
+			}
+		}
+    
+		Set<String> set=words.keySet();
+		Iterator<String> it=set.iterator();
+		while(it.hasNext()){
+			String key=it.next();
+			int value=words.get(key);
+			
+			System.out.println(key+" : "+value);		
+		}
+	}
+}
