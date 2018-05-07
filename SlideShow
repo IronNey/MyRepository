@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slide Show</title>
+    <style>
+        h1{
+            text-align: center;
+        }
+        img{
+            position: absolute;
+        }
+        #Images{
+            overflow: auto;
+            position: absolute;
+            border: 3px solid black;
+            width: 500px;
+            height: 450px;
+            left: 520px;
+        }
+        p{
+            position: relative;
+            left: 520px;
+            top: 470px;
+        }
+    </style>
+    <script>
+        function slide(){
+	        var gallery = document.getElementsByTagName("img");
+	        var img = document.getElementById("img1");
+	        var width =parseInt(img.getAttribute("width"));
+	        var i=1, left=0;
+	        var firstLeft=document.getElementById("img1").style.marginLeft;
+	        function startSlide(){
+		        if(i==gallery.length+1){
+			        var a=5;
+			        for(i=1;i<=gallery.length;i++){
+				        document.getElementById("img"+i).style.zIndex = a--;
+			        }
+		        }
+		        else{
+			        if(left != -(width+firstLeft)){
+				        document.getElementById("img"+i).style.left = (left--) + "px";
+				        setTimeout(startSlide,10);
+			        }
+			        else{
+				        document.getElementById("img"+i).style.zIndex = parseInt(document.getElementById("img"+i).style.zIndex)-gallery.length;
+				        document.getElementById("img"+i).style.left = firstLeft;
+				        i++;
+				        left=0;
+				        setTimeout(startSlide,10);
+			        }
+		        }
+	        }
+	        setTimeout(startSlide,1000);
+        }
+    </script>
+</head>
+<body>
+    <h1>Image Slide Show</h1>
+        <div id="Images">
+            <img id="img1" src="q2/1.jpg" width="500px" height="450px" style="z-index: 4;" onclick="slide(this);">
+            <img id="img2" src="q2/2.jpg" width="500px" height="450px" style="z-index: 3;">
+            <img id="img3" src="q2/3.jpg" width="500px" height="450px" style="z-index: 2;">
+            <img id="img4" src="q2/4.jpg" width="500px" height="450px" style="z-index: 1;">
+        </div>  
+    <p>Click the image to start the slide show</p>
+</body> 
+</html>
