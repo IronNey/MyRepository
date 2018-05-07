@@ -1,0 +1,49 @@
+import java.util.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.Timer;
+
+public class ST extends JFrame{
+	
+	DrawingPanel dp=new DrawingPanel();
+	private int x,y;
+	ST()
+	{
+		add(dp);
+	}
+	
+	class DrawingPanel extends JPanel
+	{
+		private String message="hello";		
+		
+		DrawingPanel()
+		{
+			Timer timer=new Timer(1000, new ActionListener()
+					{
+				public void actionPerformed(ActionEvent e)
+				{
+					 x=(int)(Math.random()*200);
+					 y=(int)(Math.random()*200);
+					 System.out.println(x+":"+y);
+				}
+					});
+			timer.start();
+		}
+		
+		protected void paintComponent(Graphics g)
+		{
+			super.paintComponent(g);
+		    g.drawString(message, x, y);
+			repaint();		
+		}
+	}
+	public static void main(String[]args)
+	{
+		JFrame f=new ST();
+		f.setSize(300, 300);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setLocationRelativeTo(null);
+		f.setVisible(true);			
+	}
+}
