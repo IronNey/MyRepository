@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            window.addEventListener("load",function(){
+            
+            document.body.style.backgroundColor="#eee";  
+            var h=document.getElementById("head");
+            h.style.textAlign="center";
+            h.style.margin="50px";
+                
+            var x=document.getElementById("ulist");
+            x.style.textAlign="center";
+
+            var lis=x.getElementsByTagName("li");   
+            for(var i=0;i<lis.length;i++){
+                lis[i].style.display="inline";
+                lis[i].addEventListener("mouseover",function(event){
+                    href=event.target.href;
+                    boxDiv.style.backgroundImage='url('+href+')';   
+                });
+            } 
+            var links=x.getElementsByTagName("a");
+
+            for(var i=0;i<links.length;i++){
+                links[i].style.textDecoration="none";
+                links[i].style.border="1px solid black";
+                links[i].style.padding="10px";
+                links[i].style.color="blue"; 
+                links[i].addEventListener("mouseover",function(){
+                this.style.backgroundColor="gray";
+                })  ;           
+            }
+            var boxDiv=document.getElementById("box");
+            boxDiv.style.border="1px solid blue";
+            boxDiv.style.width="500px";
+            boxDiv.style.height="500px";
+            boxDiv.style.margin="50px 525px";
+            boxDiv.style.backgroundColor="white";
+            });
+        </script>
+    </head>
+    <body>
+        <h1 id="head">Move Your Mouse Over Links For Different Images</h1>
+        <ul id="ulist">
+            <li><a href="https://via.placeholder.com/500x500">image 1</a></li>
+            <li><a href="https://via.placeholder.com/400x300">image 2</a></li>
+            <li><a href="https://via.placeholder.com/500x200">image 3</a></li>
+            <li><a href="https://via.placeholder.com/300x250">image 4</a></li>
+        </ul>
+        <div id="box">
+        </div> 
+     </body>
+</html>
